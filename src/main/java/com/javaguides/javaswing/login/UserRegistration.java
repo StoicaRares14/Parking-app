@@ -208,16 +208,30 @@ public class UserRegistration extends JFrame {
         });
         
         contentPane.add(btnLoginPage);
-        
-        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
-        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
-        contentPane.add(chckbxNewCheckBox);
-        
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
-        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
-        contentPane.add(chckbxNewCheckBox_1);
+
+        JRadioButton userButton = new JRadioButton("User");
+        userButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        userButton.setBounds(214, 346, 73, 23);
+        contentPane.add(userButton);
+
+        JRadioButton adminButton = new JRadioButton("Admin");
+        adminButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        adminButton.setBounds(289, 346, 99, 23);
+        contentPane.add(adminButton);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(userButton);
+        group.add(adminButton);
+
+//        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
+//        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+//        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
+//        contentPane.add(chckbxNewCheckBox);
+//
+//        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
+//        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+//        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
+//        contentPane.add(chckbxNewCheckBox_1);
         
         JLabel lblUserType = new JLabel("User Type");
         lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 20));
