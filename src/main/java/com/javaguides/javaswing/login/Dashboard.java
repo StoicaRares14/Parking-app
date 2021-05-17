@@ -11,26 +11,23 @@ import java.awt.event.MouseEvent;
 public class Dashboard extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPanel;
 
 	//private Image img_company = new ImageIcon(Dashboard.class.getResource("images/company.png")).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);
 
-	private Profile panelProfile;
-	private ParkingLots panelParkingLots;
-	private ParkingManagement panelParkingManagement;
+	private final Profile panelProfile;
+	private final ParkingLots panelParkingLots;
+	private final ParkingManagement panelParkingManagement;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Dashboard frame = new Dashboard();
-					frame.setTitle("Login Smart Parking System App");
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				Dashboard frame = new Dashboard();
+				frame.setTitle("Login Smart Parking System App");
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -47,7 +44,7 @@ public class Dashboard extends JFrame {
 		setBounds(450, 190, 1014, 597);
 		setResizable(false);
 		//setUndecorated(true);
-		contentPanel = new JPanel();
+		JPanel contentPanel = new JPanel();
 		contentPanel.setBackground(Color.WHITE);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//contentPanel.setBackground(new Color(128, 0, 128));
@@ -188,7 +185,7 @@ public class Dashboard extends JFrame {
 		panel.setVisible(true);
 	}
 	
-	private class PanelButtonMouseAdapter extends MouseAdapter{
+	private static class PanelButtonMouseAdapter extends MouseAdapter{
 		
 		JPanel panel;
 		public PanelButtonMouseAdapter(JPanel panell) {

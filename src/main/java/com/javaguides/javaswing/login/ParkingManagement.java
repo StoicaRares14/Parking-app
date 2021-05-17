@@ -2,16 +2,14 @@ package com.javaguides.javaswing.login;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class ParkingManagement extends JPanel {
-	private JTextField nameField;
-	private JTextField locationField;
-	private JTextField spotsField;
+	private final JTextField nameField;
+	private final JTextField locationField;
+	private final JTextField spotsField;
 
 	/**
 	 * Create the panel.
@@ -62,49 +60,47 @@ public class ParkingManagement extends JPanel {
 		JButton btnNewButton = new JButton("Register");
 		
 		//btnNewButton = new JButton("Register");
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String name = nameField.getText();
-                String location = locationField.getText();
-                String nr_spots = spotsField.getText();
+        btnNewButton.addActionListener(e -> {
+			String name = nameField.getText();
+			String location = locationField.getText();
+			String nr_spots = spotsField.getText();
 
-                try {
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo", "root", "admin");
+			try {
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo", "root", "admin");
 
-                    String query = "INSERT INTO parks values('" + name + "','" + location + "','" + nr_spots + "')";
-                    //PreparedStatement query = (PreparedStatement) connection
-                      //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
-                    
-                    /*
-                    query.setString(1, firstName);
-                    query.setString(2, lastName);
-                    query.setString(3, userName);
-                    query.setString(4, password);
-                    query.setString(5, emailId);
-                    query.setString(6, mobileNumber);
-                    */
-                    
-                    Statement sta = connection.createStatement();
-                    int x = sta.executeUpdate(query);
-                    //ResultSet rs = executeUpdate(query);
-                    //Statement sta = connection.createStatement();
-                    //int x = sta.executeUpdate(query);
-                    if (x == 0) {
-                    	//dispose();
-                       // UserLogin ah = new UserLogin();
-                       // ah.setTitle("Register Smart Parking System App");
-                       // ah.setVisible(true);
-                    	JOptionPane.showMessageDialog(btnNewButton, "This already exist");
-                        //JOptionPane.showMessageDialog(btnNewButton, "This is alredy exist");
-                    } else {
-                    	JOptionPane.showMessageDialog(btnNewButton, "Your park was sucessfully created");
-                    }
-                    connection.close();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-        });
+				String query = "INSERT INTO parks values('" + name + "','" + location + "','" + nr_spots + "')";
+				//PreparedStatement query = (PreparedStatement) connection
+				  //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
+
+				/*
+				query.setString(1, firstName);
+				query.setString(2, lastName);
+				query.setString(3, userName);
+				query.setString(4, password);
+				query.setString(5, emailId);
+				query.setString(6, mobileNumber);
+				*/
+
+				Statement sta = connection.createStatement();
+				int x = sta.executeUpdate(query);
+				//ResultSet rs = executeUpdate(query);
+				//Statement sta = connection.createStatement();
+				//int x = sta.executeUpdate(query);
+				if (x == 0) {
+					//dispose();
+				   // UserLogin ah = new UserLogin();
+				   // ah.setTitle("Register Smart Parking System App");
+				   // ah.setVisible(true);
+					JOptionPane.showMessageDialog(btnNewButton, "This already exist");
+					//JOptionPane.showMessageDialog(btnNewButton, "This is alredy exist");
+				} else {
+					JOptionPane.showMessageDialog(btnNewButton, "Your park was sucessfully created");
+				}
+				connection.close();
+			} catch (Exception exception) {
+				exception.printStackTrace();
+			}
+		});
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnNewButton.setBounds(191, 370, 203, 61);

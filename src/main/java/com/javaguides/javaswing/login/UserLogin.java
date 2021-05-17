@@ -3,32 +3,26 @@ package com.javaguides.javaswing.login;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class UserLogin extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private JTextField textField;
-    private JPasswordField passwordField;
-    private JButton btnNewButton;
-    private JPanel contentPane;
-    private JLabel lblNoAccount;
+    private final JTextField textField;
+    private final JPasswordField passwordField;
+    private final JButton btnNewButton;
 
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    com.javaguides.javaswing.login.UserLogin frame = new com.javaguides.javaswing.login.UserLogin();
-                    frame.setTitle("Login Smart Parking System App");
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                UserLogin frame = new UserLogin();
+                frame.setTitle("Login Smart Parking System App");
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -40,7 +34,7 @@ public class UserLogin extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(450, 190, 1014, 597);
         setResizable(false);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -79,35 +73,32 @@ public class UserLogin extends JFrame {
         btnNewButton = new JButton("Login");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
         btnNewButton.setBounds(453, 309, 126, 61);
-        btnNewButton.addActionListener(new ActionListener() {
+        btnNewButton.addActionListener(e -> {
+            String userName = textField.getText();
+            String password = passwordField.getText();
+            try {
+                Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo",
+                    "root", "admin");
 
-            public void actionPerformed(ActionEvent e) {
-                String userName = textField.getText();
-                String password = passwordField.getText();
-                try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo",
-                        "root", "admin");
+                PreparedStatement st = (PreparedStatement) connection
+                    .prepareStatement("Select user_name from users where user_name=? and password=?");
 
-                    PreparedStatement st = (PreparedStatement) connection
-                        .prepareStatement("Select user_name from users where user_name=? and password=?");
-
-                    st.setString(1, userName);
-                    st.setString(2, password);
-                    ResultSet rs = st.executeQuery();
-                    if (rs.next()) {
-                        dispose();
-                        //UserHome ah = new UserHome(userName);
-                        Autentificare c = new Autentificare(String.valueOf(rs.getString(1)));
-                        Dashboard ah = new Dashboard();
-                        ah.setTitle("Welcome");
-                        ah.setVisible(true);
-                        JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
-                    } else {
-                        JOptionPane.showMessageDialog(btnNewButton, "Wrong Username & Password");
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
+                st.setString(1, userName);
+                st.setString(2, password);
+                ResultSet rs = st.executeQuery();
+                if (rs.next()) {
+                    dispose();
+                    //UserHome ah = new UserHome(userName);
+                    Autentificare c = new Autentificare(String.valueOf(rs.getString(1)));
+                    Dashboard ah = new Dashboard();
+                    ah.setTitle("Welcome");
+                    ah.setVisible(true);
+                    JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
+                } else {
+                    JOptionPane.showMessageDialog(btnNewButton, "Wrong Username & Password");
                 }
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
             }
         });
 
@@ -118,8 +109,8 @@ public class UserLogin extends JFrame {
         lblSmartParkingSystem.setFont(new Font("Times New Roman", Font.BOLD, 40));
         lblSmartParkingSystem.setBounds(278, 11, 476, 93);
         contentPane.add(lblSmartParkingSystem);
-        
-        lblNoAccount = new JLabel("You don't have an account yet?");
+
+        JLabel lblNoAccount = new JLabel("You don't have an account yet?");
         lblNoAccount.setForeground(Color.BLACK);
         lblNoAccount.setFont(new Font("Tahoma", Font.PLAIN, 23));
         lblNoAccount.setBackground(Color.BLACK);
@@ -129,14 +120,11 @@ public class UserLogin extends JFrame {
         JButton btnRegisterHere = new JButton("Register here");
         btnRegisterHere.setFont(new Font("Tahoma", Font.PLAIN, 26));
         btnRegisterHere.setBounds(545, 441, 217, 61);
-        btnRegisterHere.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                        dispose();
-                        UserRegistration ah = new UserRegistration();
-                        ah.setTitle("Register Smart Parking System App");
-                        ah.setVisible(true);
-            }
+        btnRegisterHere.addActionListener(e -> {
+                    dispose();
+                    UserRegistration ah = new UserRegistration();
+                    ah.setTitle("Register Smart Parking System App");
+                    ah.setVisible(true);
         });
         
         contentPane.add(btnRegisterHere);
