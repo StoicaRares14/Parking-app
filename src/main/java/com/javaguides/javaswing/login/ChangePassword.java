@@ -1,22 +1,14 @@
 package com.javaguides.javaswing.login;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 public class ChangePassword extends JFrame {
 
@@ -67,11 +59,11 @@ public class ChangePassword extends JFrame {
                     System.out.println("update password name " + name);
                     System.out.println("update password");
 
-                    Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo",
-                            "root", "admin");
+                    Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo",
+                        "root", "admin");
 
                     PreparedStatement st = (PreparedStatement) con
-                            .prepareStatement("Update student set password=? where name=?");
+                        .prepareStatement("Update student set password=? where name=?");
 
                     st.setString(1, pstr);
                     st.setString(2, name);

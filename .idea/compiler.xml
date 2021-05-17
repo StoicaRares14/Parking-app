@@ -10,5 +10,8 @@
         <module name="Parking-app" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Parking-app" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

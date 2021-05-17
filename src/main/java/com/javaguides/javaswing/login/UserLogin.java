@@ -1,24 +1,11 @@
 package com.javaguides.javaswing.login;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
+import java.sql.*;
 
 public class UserLogin extends JFrame {
 
@@ -26,8 +13,8 @@ public class UserLogin extends JFrame {
     private JTextField textField;
     private JPasswordField passwordField;
     private JButton btnNewButton;
-    private JLabel label;
     private JPanel contentPane;
+    private JLabel lblNoAccount;
 
     /**
      * Launch the application.
@@ -36,7 +23,8 @@ public class UserLogin extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UserLogin frame = new UserLogin();
+                    com.javaguides.javaswing.login.UserLogin frame = new com.javaguides.javaswing.login.UserLogin();
+                    frame.setTitle("Login Smart Parking System App");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -59,56 +47,58 @@ public class UserLogin extends JFrame {
 
         JLabel lblNewLabel = new JLabel("Login");
         lblNewLabel.setForeground(Color.BLACK);
-        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 46));
-        lblNewLabel.setBounds(423, 13, 273, 93);
+        lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+        lblNewLabel.setBounds(453, 91, 101, 93);
         contentPane.add(lblNewLabel);
 
         textField = new JTextField();
-        textField.setFont(new Font("Tahoma", Font.PLAIN, 32));
-        textField.setBounds(481, 170, 281, 68);
+        textField.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        textField.setBounds(481, 174, 281, 52);
         contentPane.add(textField);
         textField.setColumns(10);
 
         passwordField = new JPasswordField();
-        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 32));
-        passwordField.setBounds(481, 286, 281, 68);
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        passwordField.setBounds(481, 237, 281, 52);
         contentPane.add(passwordField);
 
         JLabel lblUsername = new JLabel("Username");
         lblUsername.setBackground(Color.BLACK);
         lblUsername.setForeground(Color.BLACK);
-        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 31));
-        lblUsername.setBounds(250, 166, 193, 52);
+        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        lblUsername.setBounds(326, 177, 117, 52);
         contentPane.add(lblUsername);
 
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setForeground(Color.BLACK);
         lblPassword.setBackground(Color.CYAN);
-        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 31));
-        lblPassword.setBounds(250, 286, 193, 52);
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        lblPassword.setBounds(326, 240, 117, 52);
         contentPane.add(lblPassword);
 
         btnNewButton = new JButton("Login");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(545, 392, 162, 73);
+        btnNewButton.setBounds(453, 309, 126, 61);
         btnNewButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 String userName = textField.getText();
                 String password = passwordField.getText();
                 try {
-                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo",
-                            "root", "admin");
+                    Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo",
+                        "root", "admin");
 
                     PreparedStatement st = (PreparedStatement) connection
-                            .prepareStatement("Select name, password from student where name=? and password=?");
+                        .prepareStatement("Select user_name from users where user_name=? and password=?");
 
                     st.setString(1, userName);
                     st.setString(2, password);
                     ResultSet rs = st.executeQuery();
                     if (rs.next()) {
                         dispose();
-                        UserHome ah = new UserHome(userName);
+                        //UserHome ah = new UserHome(userName);
+                        Autentificare c = new Autentificare(String.valueOf(rs.getString(1)));
+                        Dashboard ah = new Dashboard();
                         ah.setTitle("Welcome");
                         ah.setVisible(true);
                         JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
@@ -122,9 +112,33 @@ public class UserLogin extends JFrame {
         });
 
         contentPane.add(btnNewButton);
+        
+        JLabel lblSmartParkingSystem = new JLabel("Smart Parking System App");
+        lblSmartParkingSystem.setForeground(Color.BLACK);
+        lblSmartParkingSystem.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        lblSmartParkingSystem.setBounds(278, 11, 476, 93);
+        contentPane.add(lblSmartParkingSystem);
+        
+        lblNoAccount = new JLabel("You don't have an account yet?");
+        lblNoAccount.setForeground(Color.BLACK);
+        lblNoAccount.setFont(new Font("Tahoma", Font.PLAIN, 23));
+        lblNoAccount.setBackground(Color.BLACK);
+        lblNoAccount.setBounds(203, 446, 332, 52);
+        contentPane.add(lblNoAccount);
+        
+        JButton btnRegisterHere = new JButton("Register here");
+        btnRegisterHere.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        btnRegisterHere.setBounds(545, 441, 217, 61);
+        btnRegisterHere.addActionListener(new ActionListener() {
 
-        label = new JLabel("");
-        label.setBounds(0, 0, 1008, 562);
-        contentPane.add(label);
+            public void actionPerformed(ActionEvent e) {
+                        dispose();
+                        UserRegistration ah = new UserRegistration();
+                        ah.setTitle("Register Smart Parking System App");
+                        ah.setVisible(true);
+            }
+        });
+        
+        contentPane.add(btnRegisterHere);
     }
 }
