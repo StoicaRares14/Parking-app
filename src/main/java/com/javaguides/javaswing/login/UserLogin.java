@@ -83,17 +83,40 @@ public class UserLogin extends JFrame {
                 PreparedStatement st = (PreparedStatement) connection
                     .prepareStatement("Select user_name from users where user_name=? and password=?");
 
+                PreparedStatement st2 = (PreparedStatement) connection
+                        .prepareStatement("Select admin from users where user_name=? and password=?");
+
                 st.setString(1, userName);
                 st.setString(2, password);
+                st2.setString(1,userName);
+                st2.setString(2,password);
                 ResultSet rs = st.executeQuery();
+                ResultSet rs2 = st2.executeQuery();
+                rs2.next();
                 if (rs.next()) {
                     dispose();
+                    Autentificare.admin=rs2.getInt("admin");
+                    //System.out.println(Autentificare.admin);
                     //UserHome ah = new UserHome(userName);
                     Autentificare c = new Autentificare(String.valueOf(rs.getString(1)));
-                    Dashboard ah = new Dashboard();
-                    ah.setTitle("Welcome");
-                    ah.setVisible(true);
-                    JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
+                    DashboardAdmin ah;
+                    DashboardUser ah2;
+                    if(Autentificare.admin==1) {
+                        ah = new DashboardAdmin();
+                        ah.setTitle("Welcome");
+                        ah.setVisible(true);
+                        JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
+                    }
+                    else
+                        if(Autentificare.admin==0)
+                    {
+
+                        ah2 = new DashboardUser();
+                        ah2.setTitle("Welcome");
+                        ah2.setVisible(true);
+                        JOptionPane.showMessageDialog(btnNewButton, "You have successfully logged in");
+                    }
+
                 } else {
                     JOptionPane.showMessageDialog(btnNewButton, "Wrong Username & Password");
                 }

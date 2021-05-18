@@ -136,9 +136,52 @@ public class UserRegistration extends JFrame {
         passwordField.setBounds(695, 273, 228, 50);
         contentPane.add(passwordField);
 
+        JRadioButton userButton = new JRadioButton("User");
+        userButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        userButton.setBounds(214, 346, 73, 23);
+        contentPane.add(userButton);
+        userButton.setActionCommand("User");
+
+        JRadioButton adminButton = new JRadioButton("Admin");
+        adminButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        adminButton.setBounds(289, 346, 99, 23);
+        contentPane.add(adminButton);
+        adminButton.setActionCommand("Admin");
+
+        int[] admin = {0};
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(userButton);
+        group.add(adminButton);
+        userButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("User")) {
+                    admin[0] =0;
+                }else
+                    admin[0] =1;
+            }
+        });
+
+        adminButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("Admin")) {
+                    admin[0] =1;
+                }else
+                    admin[0] =0;
+            }
+        });
+
+        System.out.println(admin[0]);
+
         btnNewButton = new JButton("Register");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+
+
+
                 String firstName = firstname.getText();
                 String lastName = lastname.getText();
                 String emailId = email.getText();
@@ -157,7 +200,7 @@ public class UserRegistration extends JFrame {
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo", "root", "admin");
 
                     String query = "INSERT INTO users values('" + firstName + "','" + lastName + "','" + userName + "','" +
-                            password + "','" + emailId + "','" + mobileNumber + "')";
+                            password + "','" + emailId + "','" + mobileNumber + "','" + admin[0] + "')";
                     //PreparedStatement query = (PreparedStatement) connection
                     //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
 
@@ -171,7 +214,10 @@ public class UserRegistration extends JFrame {
                     */
 
                     Statement sta = connection.createStatement();
-                    int x = sta.executeUpdate(query);
+                    int x=0;
+                    if(!isNullOrEmpty(firstName,lastName,userName,password,emailId,mobileNumber))
+                        x = sta.executeUpdate(query);
+
                     //ResultSet rs = executeUpdate(query);
                     //Statement sta = connection.createStatement();
                     //int x = sta.executeUpdate(query);
@@ -226,19 +272,7 @@ public class UserRegistration extends JFrame {
 //        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
 //        contentPane.add(chckbxNewCheckBox_1);
 
-        JRadioButton userButton = new JRadioButton("User");
-        userButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        userButton.setBounds(214, 346, 73, 23);
-        contentPane.add(userButton);
 
-        JRadioButton adminButton = new JRadioButton("Admin");
-        adminButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        adminButton.setBounds(289, 346, 99, 23);
-        contentPane.add(adminButton);
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(userButton);
-        group.add(adminButton);
 
         JLabel lblUserType = new JLabel("User Type");
         lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 20));

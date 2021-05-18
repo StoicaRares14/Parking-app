@@ -8,11 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 //import java.net.URL;
 
-public class Dashboard extends JFrame {
+public class DashboardAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	//private Image img_company = new ImageIcon(Dashboard.class.getResource("images/company.png")).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);
+	//private Image img_company = new ImageIcon(DashboardAdmin.class.getResource("images/company.png")).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);
 
 	private final Profile panelProfile;
 	private final ParkingLots panelParkingLots;
@@ -23,7 +23,7 @@ public class Dashboard extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				Dashboard frame = new Dashboard();
+				DashboardAdmin frame = new DashboardAdmin();
 				frame.setTitle("Login Smart Parking System App");
 				frame.setVisible(true);
 			} catch (Exception e) {
@@ -35,7 +35,7 @@ public class Dashboard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Dashboard() {
+	public DashboardAdmin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBackground(new Color(47, 79, 79));
 		//setLocationRelativeTo(null);
@@ -145,7 +145,7 @@ public class Dashboard extends JFrame {
 				if(JOptionPane.showConfirmDialog(null, "Are you sure you want to sign out?")==0) {
 					UserLogin frameLogin = new UserLogin();
 					frameLogin.setVisible(true);
-					Dashboard.this.dispose();
+					DashboardAdmin.this.dispose();
 				}
 			}
 		});

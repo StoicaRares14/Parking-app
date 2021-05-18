@@ -66,7 +66,7 @@ public class ParkingManagement extends JPanel {
 			String nr_spots = spotsField.getText();
 
 			try {
-				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306s/swing_demo", "root", "admin");
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo", "root", "admin");
 
 				String query = "INSERT INTO parks values('" + name + "','" + location + "','" + nr_spots + "')";
 				//PreparedStatement query = (PreparedStatement) connection
