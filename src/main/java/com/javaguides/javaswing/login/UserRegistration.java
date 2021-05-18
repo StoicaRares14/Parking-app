@@ -1,27 +1,15 @@
 package com.javaguides.javaswing.login;
 
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Toolkit;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JCheckBox;
 
 /**
  * User Registration using Swing
@@ -228,15 +216,29 @@ public class UserRegistration extends JFrame {
 
         contentPane.add(btnLoginPage);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
-        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
-        contentPane.add(chckbxNewCheckBox);
+//        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
+//        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+//        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
+//        contentPane.add(chckbxNewCheckBox);
+//
+//        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
+//        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+//        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
+//        contentPane.add(chckbxNewCheckBox_1);
 
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
-        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
-        contentPane.add(chckbxNewCheckBox_1);
+        JRadioButton userButton = new JRadioButton("User");
+        userButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        userButton.setBounds(214, 346, 73, 23);
+        contentPane.add(userButton);
+
+        JRadioButton adminButton = new JRadioButton("Admin");
+        adminButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        adminButton.setBounds(289, 346, 99, 23);
+        contentPane.add(adminButton);
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(userButton);
+        group.add(adminButton);
 
         JLabel lblUserType = new JLabel("User Type");
         lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 20));
