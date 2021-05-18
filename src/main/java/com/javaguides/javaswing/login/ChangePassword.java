@@ -52,7 +52,7 @@ public class ChangePassword extends JFrame {
                 System.out.println("update password name " + name);
                 System.out.println("update password");
 
-                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo",
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo",
                     "root", "admin");
 
                 PreparedStatement st = (PreparedStatement) con

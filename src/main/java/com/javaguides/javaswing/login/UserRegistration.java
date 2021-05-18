@@ -1,13 +1,27 @@
 package com.javaguides.javaswing.login;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JCheckBox;
 
 /**
  * User Registration using Swing
@@ -16,25 +30,35 @@ import java.sql.Statement;
  */
 public class UserRegistration extends JFrame {
     private static final long serialVersionUID = 1L;
-    private final JTextField firstname;
-    private final JTextField lastname;
-    private final JTextField email;
-    private final JTextField username;
-    private final JTextField mob;
-    private final JPasswordField passwordField;
-    private final JButton btnNewButton;
-    private final JTextField codeAdminField;
+    private JPanel contentPane;
+    private JTextField firstname;
+    private JTextField lastname;
+    private JTextField email;
+    private JTextField username;
+    private JTextField mob;
+    private JPasswordField passwordField;
+    private JButton btnNewButton;
+    private JTextField codeAdminField;
+    public static boolean isNullOrEmpty(String... strArr) {
+        for (String st : strArr) {
+            if  (st==null || st.equals(""))
+                return true;
 
+        }
+        return false;
+    }
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                UserRegistration frame = new UserRegistration();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    UserRegistration frame = new UserRegistration();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -48,7 +72,7 @@ public class UserRegistration extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(450, 190, 1014, 597);
         setResizable(false);
-        JPanel contentPane = new JPanel();
+        contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -125,134 +149,125 @@ public class UserRegistration extends JFrame {
         contentPane.add(passwordField);
 
         btnNewButton = new JButton("Register");
-        btnNewButton.addActionListener(e -> {
-            String firstName = firstname.getText();
-            String lastName = lastname.getText();
-            String emailId = email.getText();
-            String userName = username.getText();
-            String mobileNumber = mob.getText();
-            int len = mobileNumber.length();
-            String password = passwordField.getText();
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String firstName = firstname.getText();
+                String lastName = lastname.getText();
+                String emailId = email.getText();
+                String userName = username.getText();
+                String mobileNumber = mob.getText();
+                int len = mobileNumber.length();
+                String password = passwordField.getText();
 
-            String msg = "" + firstName;
-            msg += " \n";
-            if (len != 10) {
-                JOptionPane.showMessageDialog(btnNewButton, "Enter a valid mobile number");
-            }
-
-            try {
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo", "root", "admin");
-
-                String query = "INSERT INTO users values('" + firstName + "','" + lastName + "','" + userName + "','" +
-                        password + "','" + emailId + "','" + mobileNumber + "')";
-                //PreparedStatement query = (PreparedStatement) connection
-                  //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
-
-                /*
-                query.setString(1, firstName);
-                query.setString(2, lastName);
-                query.setString(3, userName);
-                query.setString(4, password);
-                query.setString(5, emailId);
-                query.setString(6, mobileNumber);
-                */
-
-                Statement sta = connection.createStatement();
-                int x = sta.executeUpdate(query);
-                //ResultSet rs = executeUpdate(query);
-                //Statement sta = connection.createStatement();
-                //int x = sta.executeUpdate(query);
-                if (x == 0) {
-                    JOptionPane.showMessageDialog(btnNewButton, "This is alredy exist");
-                } else {
-                    dispose();
-                    UserLogin ah = new UserLogin();
-                    ah.setTitle("Register Smart Parking System App");
-                    ah.setVisible(true);
-                    JOptionPane.showMessageDialog(btnNewButton,
-                        "Welcome, " + msg + "Your account was sucessfully created");
+                String msg = "" + firstName;
+                msg += " \n";
+                if (len != 10) {
+                    JOptionPane.showMessageDialog(btnNewButton, "Enter a valid mobile number");
                 }
-                connection.close();
-            } catch (Exception exception) {
-                exception.printStackTrace();
+
+                try {
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo", "root", "admin");
+
+                    String query = "INSERT INTO users values('" + firstName + "','" + lastName + "','" + userName + "','" +
+                            password + "','" + emailId + "','" + mobileNumber + "')";
+                    //PreparedStatement query = (PreparedStatement) connection
+                    //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
+
+                    /*
+                    query.setString(1, firstName);
+                    query.setString(2, lastName);
+                    query.setString(3, userName);
+                    query.setString(4, password);
+                    query.setString(5, emailId);
+                    query.setString(6, mobileNumber);
+                    */
+
+                    Statement sta = connection.createStatement();
+                    int x = sta.executeUpdate(query);
+                    //ResultSet rs = executeUpdate(query);
+                    //Statement sta = connection.createStatement();
+                    //int x = sta.executeUpdate(query);
+                    if (x == 0 || isNullOrEmpty(firstName,lastName,userName,password,emailId,mobileNumber)) {
+                        JOptionPane.showMessageDialog(btnNewButton, "This alredy exists");
+                    } else {
+                        dispose();
+                        UserLogin ah = new UserLogin();
+                        ah.setTitle("Register Smart Parking System App");
+                        ah.setVisible(true);
+                        JOptionPane.showMessageDialog(btnNewButton,
+                                "Welcome, " + msg + "Your account was sucessfully created");
+                    }
+                    connection.close();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         });
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
         btnNewButton.setBounds(408, 407, 203, 61);
         contentPane.add(btnNewButton);
-        
+
         JLabel lblYouChangedYour = new JLabel("You changed your mind? Go back to");
         lblYouChangedYour.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblYouChangedYour.setBounds(447, 508, 325, 36);
         contentPane.add(lblYouChangedYour);
-        
+
         JButton btnLoginPage = new JButton("Login Page");
         btnLoginPage.setFont(new Font("Tahoma", Font.PLAIN, 22));
         btnLoginPage.setBounds(782, 500, 153, 50);
-        
-        btnLoginPage.addActionListener(e -> {
-                    dispose();
-                    UserLogin frame = new UserLogin();
-                    frame.setTitle("Login Smart Parking System App");
-                    frame.setVisible(true);
+
+        btnLoginPage.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                UserLogin frame = new UserLogin();
+                frame.setTitle("Login Smart Parking System App");
+                frame.setVisible(true);
+            }
         });
-        
+
         contentPane.add(btnLoginPage);
 
-        JRadioButton userButton = new JRadioButton("User");
-        userButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        userButton.setBounds(214, 346, 73, 23);
-        contentPane.add(userButton);
+        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
+        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
+        contentPane.add(chckbxNewCheckBox);
 
-        JRadioButton adminButton = new JRadioButton("Admin");
-        adminButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        adminButton.setBounds(289, 346, 99, 23);
-        contentPane.add(adminButton);
+        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
+        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
+        contentPane.add(chckbxNewCheckBox_1);
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(userButton);
-        group.add(adminButton);
-
-//        JCheckBox chckbxNewCheckBox = new JCheckBox("User");
-//        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//        chckbxNewCheckBox.setBounds(214, 346, 73, 23);
-//        contentPane.add(chckbxNewCheckBox);
-//
-//        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Admin");
-//        chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//        chckbxNewCheckBox_1.setBounds(289, 346, 99, 23);
-//        contentPane.add(chckbxNewCheckBox_1);
-        
         JLabel lblUserType = new JLabel("User Type");
         lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblUserType.setBounds(91, 338, 91, 36);
         contentPane.add(lblUserType);
-        
+
         JLabel lblCodeForAdmin = new JLabel("Code for admin rights");
         lblCodeForAdmin.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblCodeForAdmin.setBounds(483, 344, 204, 24);
         contentPane.add(lblCodeForAdmin);
-        
+
         codeAdminField = new JTextField();
         codeAdminField.setText("Just for admins");
         codeAdminField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if(codeAdminField.getText().equals("Just for admins"))
-				{
-					codeAdminField.setText("");
-					
-				}
-				else {
-					codeAdminField.selectAll();
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(codeAdminField.getText().equals(""))
-					codeAdminField.setText("Just for admins");
-			}
-		});
+            @Override
+            public void focusGained(FocusEvent e) {
+                if(codeAdminField.getText().equals("Just for admins"))
+                {
+                    codeAdminField.setText("");
+
+                }
+                else {
+                    codeAdminField.selectAll();
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if(codeAdminField.getText().equals(""))
+                    codeAdminField.setText("Just for admins");
+            }
+        });
         codeAdminField.setFont(new Font("Tahoma", Font.ITALIC, 15));
         codeAdminField.setColumns(10);
         codeAdminField.setBounds(695, 334, 228, 50);

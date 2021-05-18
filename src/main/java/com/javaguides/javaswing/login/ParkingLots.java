@@ -59,7 +59,7 @@ public class ParkingLots extends JPanel {
 	    
 		Connection connection = null;
 		try {
-			connection   = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3307/swing_demo", "root", "admin");
+			connection   = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo", "root", "admin");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -1,6 +1,8 @@
 <component name="libraryTable">
   <library name="Maven: commons-dbutils:commons-dbutils:1.6">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/commons-dbutils/commons-dbutils/1.6/commons-dbutils-1.6.jar!/" />
+    </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/commons-dbutils/commons-dbutils/1.6/commons-dbutils-1.6-javadoc.jar!/" />
     </JAVADOC>
