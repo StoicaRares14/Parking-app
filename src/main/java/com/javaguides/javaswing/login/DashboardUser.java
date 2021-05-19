@@ -116,17 +116,6 @@ public class DashboardUser extends JFrame {
         paneActivity.add(lblimgTasks);
 
 
-
-        JLabel lblNewLabel_2 = new JLabel("PARKING MANAGEMENT");
-        lblNewLabel_2.setFont(new Font("Dialog", Font.BOLD, 14));
-        lblNewLabel_2.setBounds(30, 11, 175, 14);
-
-
-        JLabel lblimgDepart = new JLabel("");
-        lblimgDepart.setHorizontalAlignment(SwingConstants.CENTER);
-        lblimgDepart.setBounds(43, 0, 35, 35);
-
-
         JPanel paneLogOut = new JPanel();
         paneLogOut.addMouseListener(new PanelButtonMouseAdapter(paneLogOut)
         {@Override
@@ -139,13 +128,13 @@ public class DashboardUser extends JFrame {
         }
         });
         paneLogOut.setBackground(Color.LIGHT_GRAY);
-        paneLogOut.setBounds(30, 11, 175, 14);
+        paneLogOut.setBounds(10, 356, 228, 35);
         paneMenu.add(paneLogOut);
         paneLogOut.setLayout(null);
 
         JLabel lblLogOut = new JLabel("LOG OUT");
         lblLogOut.setFont(new Font("Dialog", Font.BOLD, 14));
-        lblLogOut.setBounds(10, 356, 228, 35);
+        lblLogOut.setBounds(30, 11, 175, 14);
         paneLogOut.add(lblLogOut);
 
         JLabel lblNumComp = new JLabel("Smart Parking System");
