@@ -1,8 +1,9 @@
+package com.javaguides.javaswing.login;
+
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 
-public class MainTest {
-
+public class Hasher {
     public static String getHash(byte[] inputBytes,String algorithm){
         String hashValue ="";
         try{
@@ -15,10 +16,4 @@ public class MainTest {
         }
         return hashValue;
     }
-
-    public static void main(String[] args) {
-        String s = "parola";
-        System.out.println(getHash(s.getBytes(),"SHA-512"));
-    }
 }
-

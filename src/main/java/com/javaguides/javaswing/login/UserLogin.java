@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.sql.*;
 
+import static com.javaguides.javaswing.login.Hasher.getHash;
+
 public class UserLogin extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -75,7 +77,7 @@ public class UserLogin extends JFrame {
         btnNewButton.setBounds(453, 309, 126, 61);
         btnNewButton.addActionListener(e -> {
             String userName = textField.getText();
-            String password = passwordField.getText();
+            String password = getHash(passwordField.getText().getBytes(),"SHA-512");
             try {
                 Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo",
                     "root", "admin");

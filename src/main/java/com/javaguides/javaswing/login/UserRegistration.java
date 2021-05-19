@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import static com.javaguides.javaswing.login.Hasher.getHash;
+
 /**
  * User Registration using Swing
  *
@@ -189,7 +191,7 @@ public class UserRegistration extends JFrame {
                 String userName = username.getText();
                 String mobileNumber = mob.getText();
                 int len = mobileNumber.length();
-                String password = passwordField.getText();
+                String password = getHash(passwordField.getText().getBytes(),"SHA-512");
                 String park_oc = "No reservation";
 
                 String msg = "" + firstName;

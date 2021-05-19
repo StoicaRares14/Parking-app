@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import static com.javaguides.javaswing.login.Hasher.getHash;
+
 public class ChangePassword extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +49,7 @@ public class ChangePassword extends JFrame {
         JButton btnSearch = new JButton("Enter");
         btnSearch.addActionListener(e -> {
 
-            String pstr = textField.getText();
+            String pstr = getHash(textField.getText().getBytes(),"SHA-512");;
             try {
                 System.out.println("update password name " + name);
                 System.out.println("update password");
