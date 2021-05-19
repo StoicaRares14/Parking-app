@@ -202,7 +202,7 @@ public class UserRegistration extends JFrame {
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo", "root", "admin");
 
                     String query = "INSERT INTO users values('" + firstName + "','" + lastName + "','" + userName + "','" +
-                            password + "','" + emailId + "','" + mobileNumber + "','" + admin[0] + "','"+ park_oc + "')";
+                            password + "','" + emailId + "','" + mobileNumber + "','" + admin[0] + "','" + park_oc + "')";
                     //PreparedStatement query = (PreparedStatement) connection
                     //      .prepareStatement ( "INSERT INTO users" + " (first_name, last_name, user_name, password, email, mobile_number) VALUES " + " (?, ?, ?, ?, ?, ?);");
 
