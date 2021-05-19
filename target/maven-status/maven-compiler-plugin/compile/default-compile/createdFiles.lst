@@ -7,7 +7,9 @@ com\javaguides\javaswing\login\Profile.class
 com\javaguides\javaswing\login\Autentificare.class
 com\javaguides\javaswing\login\DashboardUser$1.class
 com\javaguides\javaswing\login\UserRegistration$6.class
+com\javaguides\javaswing\login\ParkingLots$3.class
 Main.class
+com\javaguides\javaswing\login\Parcare.class
 com\javaguides\javaswing\login\DashboardAdmin$3.class
 com\javaguides\javaswing\login\ParkingLots.class
 com\javaguides\javaswing\login\DashboardAdmin.class
@@ -22,8 +24,10 @@ com\javaguides\javaswing\login\DashboardAdmin$4.class
 com\javaguides\javaswing\login\UserRegistration$2.class
 com\javaguides\javaswing\login\ParkingLots$1.class
 com\javaguides\javaswing\login\DashboardUser$PanelButtonMouseAdapter.class
+com\javaguides\javaswing\login\ParkingManagement$1.class
 com\javaguides\javaswing\login\UserRegistration$5.class
 com\javaguides\javaswing\login\ParkingLots$2.class
+com\javaguides\javaswing\login\ParkingLots$4.class
 com\javaguides\javaswing\login\ButtonRenderer.class
 com\javaguides\javaswing\login\UserLogin.class
 com\javaguides\javaswing\login\UserRegistration$3.class
