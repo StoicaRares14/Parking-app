@@ -13,8 +13,8 @@ import java.sql.Statement;
 
 /**
  * User Registration using Swing
- * @author javaguides.net
  *
+ * @author javaguides.net
  */
 public class UserRegistration extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -27,14 +27,16 @@ public class UserRegistration extends JFrame {
     private JPasswordField passwordField;
     private JButton btnNewButton;
     private JTextField codeAdminField;
+
     public static boolean isNullOrEmpty(String... strArr) {
         for (String st : strArr) {
-            if  (st==null || st.equals(""))
+            if (st == null || st.equals(""))
                 return true;
 
         }
         return false;
     }
+
     /**
      * Launch the application.
      */
@@ -153,13 +155,14 @@ public class UserRegistration extends JFrame {
         ButtonGroup group = new ButtonGroup();
         group.add(userButton);
         group.add(adminButton);
+
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("User")) {
-                    admin[0] =0;
-                }else
-                    admin[0] =1;
+                    admin[0] = 0;
+                } else
+                    admin[0] = 1;
             }
         });
 
@@ -167,9 +170,9 @@ public class UserRegistration extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getActionCommand().equals("Admin")) {
-                    admin[0] =1;
-                }else
-                    admin[0] =0;
+                    admin[0] = 1;
+                } else
+                    admin[0] = 0;
             }
         });
 
@@ -178,8 +181,6 @@ public class UserRegistration extends JFrame {
         btnNewButton = new JButton("Register");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-
 
 
                 String firstName = firstname.getText();
@@ -214,14 +215,14 @@ public class UserRegistration extends JFrame {
                     */
 
                     Statement sta = connection.createStatement();
-                    int x=0;
-                    if(!isNullOrEmpty(firstName,lastName,userName,password,emailId,mobileNumber))
+                    int x = 0;
+                    if (!isNullOrEmpty(firstName, lastName, userName, password, emailId, mobileNumber))
                         x = sta.executeUpdate(query);
 
                     //ResultSet rs = executeUpdate(query);
                     //Statement sta = connection.createStatement();
                     //int x = sta.executeUpdate(query);
-                    if (x == 0 || isNullOrEmpty(firstName,lastName,userName,password,emailId,mobileNumber)) {
+                    if (x == 0 || isNullOrEmpty(firstName, lastName, userName, password, emailId, mobileNumber)) {
                         JOptionPane.showMessageDialog(btnNewButton, "This alredy exists");
                     } else {
                         dispose();
@@ -273,7 +274,6 @@ public class UserRegistration extends JFrame {
 //        contentPane.add(chckbxNewCheckBox_1);
 
 
-
         JLabel lblUserType = new JLabel("User Type");
         lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblUserType.setBounds(91, 338, 91, 36);
@@ -289,18 +289,17 @@ public class UserRegistration extends JFrame {
         codeAdminField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if(codeAdminField.getText().equals("Just for admins"))
-                {
+                if (codeAdminField.getText().equals("Just for admins")) {
                     codeAdminField.setText("");
 
-                }
-                else {
+                } else {
                     codeAdminField.selectAll();
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
-                if(codeAdminField.getText().equals(""))
+                if (codeAdminField.getText().equals(""))
                     codeAdminField.setText("Just for admins");
             }
         });

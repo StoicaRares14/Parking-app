@@ -12,33 +12,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../demoVlad/Resources/rs2xml/rs2xml.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../demoVlad/Resources/rs2xml/rs2xml.jar!/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/Resources/rs2xml/rs2xml.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/Resources/rs2xml/rs2xml.jar!/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
+    <orderEntry type="library" name="rs2xml" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
-    <orderEntry type="library" name="Maven: commons-dbutils:commons-dbutils:1.6" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: rs2xml:rs2xml:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/rs2xml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.0" level="project" />
@@ -54,6 +39,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-expression:5.1.8.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.1.6.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.1.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.11.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.logging.log4j:log4j-api:2.11.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.slf4j:jul-to-slf4j:1.7.26" level="project" />
